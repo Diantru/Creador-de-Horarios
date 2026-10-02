@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
@@ -44,6 +45,18 @@ public class HorarioApp extends Application {
         HBox controles = new HBox(10, comboMes, comboAño, boton);
 
         TableView<Persona> tabla = new TableView<>();
+
+        Turno turnoManana = new Turno("07:00 - 15:00",
+            LocalTime.of(7,0), LocalTime.of(15,0)
+        );
+
+        Turno turnoLargo = new Turno("07:00 - 19:00",
+            LocalTime.of(7,0), LocalTime.of(19,0)
+        );
+
+        Turno turnoNoche = new Turno("19:00 - 07:00",
+            LocalTime.of(19,0), LocalTime.of(7,0)
+        );
 
         boton.setOnAction(event -> {
 
@@ -99,6 +112,8 @@ public class HorarioApp extends Application {
 
             TableColumn<Persona, String> columna = 
                 new TableColumn<>(dia + " " + nombreDia);
+
+            columna.setUserData(fecha);
 
             columna.setPrefWidth(100);
 
